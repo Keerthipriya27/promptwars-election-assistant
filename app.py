@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, jsonify
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,14 +35,15 @@ def chat():
         })
 
     try:
-        genai.configure(api_key=api_key)
-        # Using gemini-1.5-flash for text tasks
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        client = genai.Client(api_key=api_key)
         
         # Simple prompt wrapping
         full_prompt = f"{SYSTEM_PROMPT}\n\nUser Question: {user_message}\nAssistant:"
         
-        response = model.generate_content(full_prompt)
+        response = client.models.generate_content(
+            model='gemini-2.0-flash',
+            contents=full_prompt,
+        )
         return jsonify({"response": response.text})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
