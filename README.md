@@ -18,6 +18,10 @@ Our approach is centered on **unbiased civic enablement**. The core logic revolv
 3. **AI Orchestration**: The Flask server utilizes the `google-generativeai` SDK. It securely injects the `GEMINI_API_KEY` and prepends the system prompt to the user's message before sending it to the `gemini-pro` model.
 4. **Response Delivery**: The generated text is streamed back to the frontend and rendered in a user-friendly chat bubble format.
 
+## 🌟 Live Demo
+The application is successfully deployed and accessible here:
+**[Live Application URL](https://promptwars-election-assistant-64969332768.us-central1.run.app)**
+
 ## 📌 Assumptions Made
 - **Factual Basis**: We assume the underlying LLM (Gemini) has accurate, up-to-date knowledge of general electoral processes and timelines.
 - **API Availability**: We assume a valid Google Gemini API key is provided in the environment.
