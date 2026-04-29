@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Process Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>🗳️ Civic Guide</h1>
+            <p>Your interactive assistant for understanding the election process.</p>
+        </header>
+
+        <div class="main-content">
+            <div class="timeline-panel">
+                <h2>Key Steps</h2>
+                <ul class="timeline">
+                    <li class="timeline-item">
+                        <div class="timeline-icon">1</div>
+                        <div class="timeline-content">
+                            <h3>Register to Vote</h3>
+                            <p>Check your state's deadline.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-icon">2</div>
+                        <div class="timeline-content">
+                            <h3>Research Rules</h3>
+                            <p>Learn about ID requirements and voting methods.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-icon">3</div>
+                        <div class="timeline-content">
+                            <h3>Cast Ballot</h3>
+                            <p>Vote early, by mail, or on Election Day.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="chat-panel">
+                <div class="chat-history" id="chat-history">
+                    <div class="message bot-message">
+                        Hello! I'm here to help you understand the election process. Ask me about voter registration, important dates, or how to vote!
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="e.g. How do I register to vote?" autocomplete="off" />
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
