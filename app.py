@@ -36,8 +36,8 @@ def chat():
 
     try:
         genai.configure(api_key=api_key)
-        # Using gemini-pro for text tasks
-        model = genai.GenerativeModel('gemini-pro')
+        # Using gemini-1.5-flash for text tasks
+        model = genai.GenerativeModel('gemini-1.5-flash')
         
         # Simple prompt wrapping
         full_prompt = f"{SYSTEM_PROMPT}\n\nUser Question: {user_message}\nAssistant:"
