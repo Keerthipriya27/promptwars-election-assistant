@@ -21,6 +21,18 @@ Rules:
 def home():
     return render_template('index.html')
 
+@app.route('/models', methods=['GET'])
+def list_models():
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return jsonify({"error": "No API key"})
+    try:
+        client = genai.Client(api_key=api_key)
+        models = [m.name for m in client.models.list()]
+        return jsonify({"models": models})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get('message', '')
@@ -41,12 +53,16 @@ def chat():
         full_prompt = f"{SYSTEM_PROMPT}\n\nUser Question: {user_message}\nAssistant:"
         
         response = client.models.generate_content(
-            model='gemini-2.0-flash',
+            model='gemini-2.5-flash',
             contents=full_prompt,
         )
         return jsonify({"response": response.text})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        error_msg = str(e)
+        if '429' in error_msg or 'RESOURCE_EXHAUSTED' in error_msg:
+            return jsonify({"error": "The AI service is currently busy or has reached its rate limit. Please wait a few seconds and try again."}), 429
+        return jsonify({"error": error_msg}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)

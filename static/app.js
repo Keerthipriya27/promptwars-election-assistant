@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             typingIndicator.style.display = 'none';
 
             if (data.error) {
-                addMessage("Oops! Something went wrong: " + data.error);
+                addMessage(data.error);
             } else {
                 addMessage(data.response);
             }
